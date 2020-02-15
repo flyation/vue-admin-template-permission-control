@@ -90,9 +90,33 @@ export const constantRoutes = [
     ]
   },
 
-  // 原代码中404页面放在asyncRoutes的最后
-  // 404 page must be placed at the end !!!
-  { path: '*', redirect: '/404', hidden: true }
+  {
+    path: '/reserve',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        name: 'Reserve',
+        component: () => import('@/views/reserve/index'),
+        meta: { title: '预约教室', icon: 'table' }
+      }
+    ]
+  },
+
+  {
+    path: '/profile',
+    component: Layout,
+    name: 'User',
+    meta: { title: '个人中心', icon: 'example' },
+    children: [
+      {
+        path: 'index',
+        name: 'Record',
+        component: () => import('@/views/profile/index'),
+        meta: { title: '预约记录', icon: 'table' }
+      }
+    ]
+  }
 ]
 
 /**
@@ -155,6 +179,11 @@ export const asyncRoutes = [
         path: 'menu2',
         component: () => import('@/views/nested/menu2/index'),
         meta: { title: 'menu2' }
+      },
+      {
+        path: 'classroom',
+        component: () => import('@/views/admin/classroom'),
+        meta: { title: 'classroom' }
       }
     ]
   },
@@ -169,7 +198,33 @@ export const asyncRoutes = [
         meta: { title: 'External Link', icon: 'link' }
       }
     ]
-  }
+  },
+
+  {
+    path: '/admin',
+    component: Layout,
+    redirect: '/admin/check',
+    name: 'Admin',
+    meta: { title: '管理中心', icon: 'example', roles: 'admin' },
+    children: [
+      {
+        path: 'check',
+        name: 'Check',
+        component: () => import('@/views/admin/check'),
+        meta: { title: '预约审核', icon: 'table' }
+      },
+      {
+        path: 'index',
+        name: 'Classroom',
+        component: () => import('@/views/admin/classroom'),
+        meta: { title: '教室管理', icon: 'table' }
+      }
+    ]
+  },
+
+  // 原代码中该404页面放在asyncRoutes的最后
+  // 404 page must be placed at the end !!!
+  { path: '*', redirect: '/404', hidden: true }
 ]
 
 const createRouter = () => new Router({

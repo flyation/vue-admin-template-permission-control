@@ -7,7 +7,7 @@ import { asyncRoutes, constantRoutes } from '@/router'
  */
 function hasPermission(roles, route) {
   if (route.meta && route.meta.roles) {
-    // return roles.some(role => route.meta.roles.includes(role)) // 原代码中roles未数组
+    // return roles.some(role => route.meta.roles.includes(role)) // 原代码中roles为数组
     return roles === route.meta.roles
   } else {
     return true
