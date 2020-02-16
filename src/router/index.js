@@ -179,11 +179,6 @@ export const asyncRoutes = [
         path: 'menu2',
         component: () => import('@/views/nested/menu2/index'),
         meta: { title: 'menu2' }
-      },
-      {
-        path: 'classroom',
-        component: () => import('@/views/admin/classroom'),
-        meta: { title: 'classroom' }
       }
     ]
   },
@@ -214,7 +209,7 @@ export const asyncRoutes = [
         meta: { title: '预约审核', icon: 'table' }
       },
       {
-        path: 'index',
+        path: 'classroom',
         name: 'Classroom',
         component: () => import('@/views/admin/classroom'),
         meta: { title: '教室管理', icon: 'table' }

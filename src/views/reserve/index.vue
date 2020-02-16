@@ -4,7 +4,7 @@
     <!-- 查询按钮 -->
     <el-form :inline="true" class="demo-form-inline">
       <el-form-item>
-        <el-button type="primary" icon="el-icon-circle-plus" @click="handleSearchOpen()">搜索教室</el-button>
+        <el-button type="primary" icon="el-icon-search" @click="handleSearchOpen()">搜索教室</el-button>
       </el-form-item>
     </el-form>
 
@@ -207,8 +207,8 @@
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
       :current-page=currentPage
-      :page-sizes="[5, 10, 20,]"
-      :page-size="10"
+      :page-sizes="[7, 10, 20]"
+      :page-size="7"
       layout="total, sizes, prev, pager, next, jumper"
       :total=total>
     </el-pagination>
@@ -224,7 +224,7 @@ export default {
     return {
       total: 0, // 总记录数
       currentPage: 1, // 当前页
-      pageSize: 10, // 每页大小
+      pageSize: 7, // 每页大小
       list: [], // 后端传回数据列表
       id: '', // 数据库id
       dialogSearchVisible: false, // 条件查询对话框是否可见
@@ -272,7 +272,7 @@ export default {
     // 抓取列表数据
     fetchData() {
       this.listLoading = true
-      reserveApi.getPageList(this.currentPage, this.pageSize, this.searchMap).then(response => {
+      reserveApi.getScheduleList(this.currentPage, this.pageSize, this.searchMap).then(response => {
         if (response.flag === true) {
           this.list = response.data.rows
           this.total = response.data.total
@@ -287,7 +287,7 @@ export default {
     },
     // 条件查询对话框确认
     handleSearchSubmit() {
-      reserveApi.getPageList(this.currentPage, this.pageSize, this.searchMap).then(response => {
+      reserveApi.getScheduleList(this.currentPage, this.pageSize, this.searchMap).then(response => {
         if (response.flag === true) {
           this.list = response.data.rows
           this.total = response.data.total
@@ -312,7 +312,7 @@ export default {
     // 教室预约对话框确认
     handleReserveSubmit() {
       message.handleShowMessage(reserveApi.apply(this.pojo), this)
-      this.dialogSearchVisible = false // 隐藏窗口
+      this.dialogReserveVisible = false // 隐藏窗口
     }
   }
 }
