@@ -14,19 +14,17 @@
         prop="name"
         label="教室名">
       </el-table-column>
-
       <el-table-column
         sortable
         prop="date"
         label="使用日期">
       </el-table-column>
-
       <el-table-column
         sortable
         prop="course1"
         label="第1节课">
         <template slot-scope="scope">
-          {{ scope.row.course1 ? '已选': '' }}
+          <el-button type="success" icon="el-icon-check" circle v-if="scope.row.course1"></el-button>
         </template>
       </el-table-column>
       <el-table-column
@@ -34,7 +32,7 @@
         prop="course2"
         label="第2节课">
         <template slot-scope="scope">
-          {{ scope.row.course2 ? '已选': '' }}
+          <el-button type="success" icon="el-icon-check" circle v-if="scope.row.course2"></el-button>
         </template>
       </el-table-column>
       <el-table-column
@@ -42,7 +40,7 @@
         prop="course3"
         label="第3节课">
         <template slot-scope="scope">
-          {{ scope.row.course3 ? '已选': '' }}
+          <el-button type="success" icon="el-icon-check" circle v-if="scope.row.course3"></el-button>
         </template>
       </el-table-column>
       <el-table-column
@@ -50,7 +48,7 @@
         prop="course4"
         label="第4节课">
         <template slot-scope="scope">
-          {{ scope.row.course4 ? '已选': '' }}
+          <el-button type="success" icon="el-icon-check" circle v-if="scope.row.course4"></el-button>
         </template>
       </el-table-column>
 
@@ -62,14 +60,21 @@
 
       <el-table-column
         sortable
-        prop="check"
+        prop="checkd"
         label="审核状态">
+        <template slot-scope="scope">
+          <font color="#b8860b"><b>{{ scope.row.checkd === "待审" ?  '待审': '' }}</b></font>
+          <font color="#228b22"><b>{{ scope.row.checkd === "通过" ?  '通过': '' }}</b></font>
+          <font color="#dc143c"><b>{{ scope.row.checkd === "否决" ?  '否决': '' }}</b></font>
+        </template>
       </el-table-column>
 
       <el-table-column
         fixed="right"
-        label="操作">
+        label="操作"
+        width="200%">
         <template slot-scope="scope">
+          <el-button type="primary" size="small" @click="handleDetail(scope.row)">审核流程</el-button>
           <el-button type="warning" size="small" @click="handleCancelOpen(scope.row)">撤销预约</el-button>
         </template>
       </el-table-column>
