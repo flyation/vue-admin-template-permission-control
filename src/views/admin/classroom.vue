@@ -2,22 +2,12 @@
   <div class="app-container">
     <!-- 查询条件 -->
     <el-form :inline="true" class="demo-form-inline">
-<!--      <el-form-item label="教室类型">-->
-<!--        <el-input v-model="searchMap.type" placeholder="教室类型"></el-input>-->
-<!--      </el-form-item>-->
-<!--      <el-form-item label="教室容量">-->
-<!--        <el-input v-model="searchMap.capacity" placeholder="教室容量"></el-input>-->
-<!--      </el-form-item>-->
-<!--      <el-form-item label="教室楼层">-->
-<!--        <el-input-number v-model="searchMap.floor"></el-input-number>-->
-<!--      </el-form-item>-->
       <el-form-item>
-<!--        <el-button type="primary" @click="handleSearch">查询</el-button>-->
-        <el-button type="primary" icon="el-icon-circle-plus" @click="handleEdit('')">新增教室</el-button>
+        <el-button type="primary" @click="handleEdit('')" icon="el-icon-circle-plus-outline" >新增教室</el-button>
       </el-form-item>
     </el-form>
 
-    <!-- 编辑框 -->
+    <!-- 新增教室/修改教室对话框 -->
     <el-dialog title="新增教室" :visible.sync="dialogVisible" width="30%">
       <el-form :model="pojo" label-width="100px">
         <el-form-item label="教室名">
@@ -29,10 +19,20 @@
         <el-form-item label="教室容量">
           <el-input-number v-model="pojo.capacity" placeholder="教室容量"></el-input-number>
         </el-form-item>
+        <el-form-item label="教学楼">
+          <el-select v-model="pojo.building" placeholder="请选择">
+            <el-option
+              v-for="item in buildingOptions"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value">
+            </el-option>
+          </el-select>
+        </el-form-item>
         <el-form-item label="教室类型">
           <el-select v-model="pojo.type" placeholder="请选择">
             <el-option
-              v-for="item in options"
+              v-for="item in typeOptions"
               :key="item.value"
               :label="item.label"
               :value="item.value">
@@ -40,7 +40,7 @@
           </el-select>
         </el-form-item>
         <el-form-item label="是否报修">
-          <el-switch v-model="pojo.repair" active-value="1" inactive-value="0"></el-switch>
+          <el-switch v-model="pojo.repair"  :active-value="true" :inactive-value="false"></el-switch>
         </el-form-item>
       </el-form>
       <span slot="footer" class="dialog-footer">
@@ -92,8 +92,8 @@
         prop="repair"
         label="是否报修">
         <template slot-scope="scope">
-          <font color="red">{{ scope.row.repair === 1 ?  '报修': '' }}</font>
-          <font color="#228b22">{{ scope.row.repair === 0 ?  '正常使用': '' }}</font>
+          <font color="red"><b>{{ scope.row.repair === true ?  '报修': '' }}</b></font>
+          <font color="#228b22">{{ scope.row.repair === false ?  '正常使用': '' }}</font>
         </template>
       </el-table-column>
       <el-table-column
@@ -102,8 +102,8 @@
         width="200">
         <template slot-scope="scope">
           <!--        <el-button @click="handleShow(scope.$index, scope.row)" type="text" size="small">查看</el-button>-->
-          <el-button type="warning" size="small" @click="handleEdit(scope.row.id)">修改</el-button>
-          <el-button type="danger" size="small" @click="handleDelete(scope.row.id)">删除</el-button>
+          <el-button type="warning" size="small" @click="handleEdit(scope.row.id)" icon="el-icon-edit">修改</el-button>
+          <el-button type="danger" size="small" @click="handleDelete(scope.row.id)" icon="el-icon-delete">删除</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -139,12 +139,19 @@ export default {
       pojo: {}, // 弹出框数据
       listLoading: true, // 加载中动画
       // 教室类型选项
-      options: [{
-        value: '0',
+      typeOptions: [{
+        value: '普通教室',
         label: '普通教室'
       }, {
-        value: '1',
+        value: '多媒体教室',
         label: '多媒体教室'
+      }],
+      buildingOptions: [{
+        value: '明德楼',
+        label: '明德楼'
+      }, {
+        value: '文德楼',
+        label: '文德楼'
       }]
     }
   },
@@ -171,7 +178,7 @@ export default {
         this.listLoading = false
       })
     },
-    // 弹出框 新增/修改
+    // 新增教室/修改教室弹出框
     handleEdit(id) {
       this.dialogVisible = true
       this.id = id

@@ -68,6 +68,7 @@
       :data="list"
       stripe
       border
+      max-height="480"
       v-loading="listLoading">
       <el-table-column
         type="index">
@@ -148,7 +149,7 @@
         fixed="right"
         label="操作">
         <template slot-scope="scope">
-          <el-button type="primary" size="small" @click="handleReserve(scope.row)">预约</el-button>
+          <el-button type="primary" size="small" @click="handleReserveOpen(scope.row)" icon="el-icon-shopping-cart-2">预约</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -207,8 +208,8 @@
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
       :current-page=currentPage
-      :page-sizes="[7, 10, 20]"
-      :page-size="7"
+      :page-sizes="[5, 10, 20]"
+      :page-size="10"
       layout="total, sizes, prev, pager, next, jumper"
       :total=total>
     </el-pagination>
@@ -224,7 +225,7 @@ export default {
     return {
       total: 0, // 总记录数
       currentPage: 1, // 当前页
-      pageSize: 7, // 每页大小
+      pageSize: 10, // 每页大小
       list: [], // 后端传回数据列表
       id: '', // 数据库id
       dialogSearchVisible: false, // 条件查询对话框是否可见
@@ -296,7 +297,7 @@ export default {
       this.dialogSearchVisible = false // 隐藏窗口
     },
     // 教室预约对话框打开
-    handleReserve(row) {
+    handleReserveOpen(row) {
       this.dialogReserveVisible = true
       this.pojo = row
       this.pojo.disable1 = row.course1
@@ -307,7 +308,7 @@ export default {
       this.form.course2 = false
       this.form.course3 = false
       this.form.course4 = false
-      this.pojo.uid = 2200
+      this.pojo.uid = 19980307
     },
     // 教室预约对话框确认
     handleReserveSubmit() {
