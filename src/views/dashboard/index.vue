@@ -2,12 +2,16 @@
   <div class="dashboard-container">
     <div class="dashboard-text">name: {{ name }}</div>
     <div class="dashboard-text">roles: <span v-for="role in roles" :key="role">{{ role }}</span></div>
-    <div class="dashboard-text">{{this.$store.state.user.avatar}}</div>
+    <mallki class-name="mallki-text" :text="this.$store.state.user.avatar" />
+    <router-link class="pan-btn blue-btn" to="/documentation/index">
+      Documentation123
+    </router-link>
   </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
+import Mallki from '@/components/TextHoverEffect/Mallki'
 
 export default {
   name: 'Dashboard',
@@ -16,6 +20,9 @@ export default {
       'name',
       'roles'
     ])
+  },
+  components: {
+    Mallki
   }
 }
 </script>

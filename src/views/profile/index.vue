@@ -8,82 +8,102 @@
       max-height="480"
       v-loading="listLoading">
       <el-table-column
+        align="center"
         type="index">
       </el-table-column>
       <el-table-column
         sortable
+        align="center"
         width="90"
         prop="name"
         label="教室名">
       </el-table-column>
       <el-table-column
         sortable
-        width="120"
+        align="center"
+        width="110"
         prop="date"
         label="使用日期">
       </el-table-column>
       <el-table-column
-        width="80"
+        align="center"
+        width="75"
         prop="course1"
         label="第1节课">
         <template slot-scope="scope">
-          &nbsp; &nbsp;
           <el-button type="success" icon="el-icon-check" circle size="small" v-if="scope.row.course1"></el-button>
         </template>
       </el-table-column>
       <el-table-column
+        align="center"
         width="75"
         prop="course2"
         label="第2节课">
         <template slot-scope="scope">
-          &nbsp;
           <el-button type="success" icon="el-icon-check" circle size="small" v-if="scope.row.course2"></el-button>
         </template>
       </el-table-column>
       <el-table-column
+        align="center"
         width="75"
         prop="course3"
         label="第3节课">
         <template slot-scope="scope">
-          &nbsp;
           <el-button type="success" icon="el-icon-check" circle size="small" v-if="scope.row.course3"></el-button>
         </template>
       </el-table-column>
       <el-table-column
+        align="center"
         width="75"
         prop="course4"
         label="第4节课">
         <template slot-scope="scope">
-          &nbsp;
           <el-button type="success" icon="el-icon-check" circle size="small" v-if="scope.row.course4"></el-button>
         </template>
       </el-table-column>
 
       <el-table-column
         sortable
+        :show-overflow-tooltip='true'
         prop="reason"
         label="申请事由">
       </el-table-column>
 
       <el-table-column
-        width="90"
+        :show-overflow-tooltip='true'
+        prop="type"
+        label="预约类型">
+        <template slot-scope="scope">
+          <i class="el-icon-user" v-show="scope.row.type">&nbsp;{{'预约座位'}}</i>
+          <i class="el-icon-user-solid" v-show="scope.row.type === false">&nbsp;{{'预约教室'}}</i>
+        </template>
+      </el-table-column>
+
+      <el-table-column
+        align="center"
+        width="80"
         prop="checked"
         label="审核状态">
         <template slot-scope="scope">
-          <font color="#b8860b"><b>{{ scope.row.checked === "待审" ?  '待审': '' }}</b></font>
-          <font color="#228b22"><b>{{ scope.row.checked === "通过" ?  '通过': '' }}</b></font>
-          <font color="#dc143c"><b>{{ scope.row.checked === "否决" ?  '否决': '' }}</b></font>
+          <div v-if="scope.row.cancel">已取消</div>
+          <div v-else>
+            <font color="#b8860b"><b>{{ scope.row.checked === "待审" ?  '待审': '' }}</b></font>
+            <font color="#228b22"><b>{{ scope.row.checked === "通过" ?  '通过': '' }}</b></font>
+            <font color="#dc143c"><b>{{ scope.row.checked === "否决" ?  '否决': '' }}</b></font>
+          </div>
         </template>
       </el-table-column>
 
       <el-table-column
         sortable
-        width="180"
+        align="center"
+        width="160"
         prop="time1"
         label="申请时间">
       </el-table-column>
 
       <el-table-column
+        align="center"
         fixed="right"
         width="180"
         label="操作">
@@ -91,7 +111,6 @@
           <el-button type="primary" size="small" @click="handleDetail(scope.row)" icon="el-icon-document">流程</el-button>
           <el-button type="warning" size="small" @click="handleCancelOpen(scope.row)" v-if="scope.row.cancel === false" icon="el-icon-delete">撤销</el-button>
           <el-button type="warning" size="small" v-else ><font color="#dc143c"><b>已取消&nbsp;</b></font></el-button>
-<!--          <font color="#dc143c"><b>{{ scope.row.cancel === true ?  '已取消': '' }}</b></font>-->
         </template>
       </el-table-column>
     </el-table>
@@ -177,7 +196,7 @@ export default {
     // 抓取列表数据
     fetchData() {
       this.listLoading = true
-      reserveApi.getUserRecordList(this.currentPage, this.pageSize, 0).then(response => {
+      reserveApi.getUserRecordList(this.currentPage, this.pageSize).then(response => {
         if (response.flag === true) {
           this.list = response.data.rows
           this.total = response.data.total
@@ -226,3 +245,7 @@ export default {
 }
 </script>
 
+<style lang="css">
+  /* 表格内文字过多时省略号显示，弹出框显示全部文字时的样式 */
+  .el-tooltip__popper{font-size: 14px; max-width:25% } /*设置显示隐藏部分内容，按50%显示*/
+</style>
