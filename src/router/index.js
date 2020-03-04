@@ -93,6 +93,7 @@ export const constantRoutes = [
   {
     path: '/reserve',
     component: Layout,
+    redirect: '/reserve/index',
     children: [
       {
         path: 'index',

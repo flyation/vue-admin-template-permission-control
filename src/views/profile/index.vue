@@ -5,7 +5,7 @@
       :data="list"
       stripe
       border
-      max-height="480"
+      max-height="570"
       v-loading="listLoading">
       <el-table-column
         align="center"
@@ -14,9 +14,9 @@
       <el-table-column
         sortable
         align="center"
-        width="90"
+        width="80"
         prop="name"
-        label="教室名">
+        label="教室">
       </el-table-column>
       <el-table-column
         sortable
@@ -63,7 +63,6 @@
       </el-table-column>
 
       <el-table-column
-        sortable
         :show-overflow-tooltip='true'
         prop="reason"
         label="申请事由">
@@ -71,11 +70,13 @@
 
       <el-table-column
         :show-overflow-tooltip='true'
+        align="center"
+        width="100px"
         prop="type"
         label="预约类型">
         <template slot-scope="scope">
-          <i class="el-icon-user" v-show="scope.row.type">&nbsp;{{'预约座位'}}</i>
-          <i class="el-icon-user-solid" v-show="scope.row.type === false">&nbsp;{{'预约教室'}}</i>
+          <i class="el-icon-user-solid" v-show="scope.row.type">&nbsp;{{'预约教室'}}</i>
+          <i class="el-icon-user" v-show="!scope.row.type">&nbsp;{{'预约座位'}}</i>
         </template>
       </el-table-column>
 

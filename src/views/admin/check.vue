@@ -10,63 +10,74 @@
       max-height="480"
       style="width: 100%">
       <el-table-column
+        align="center"
         type="index"
         width="50">
       </el-table-column>
       <el-table-column
+        align="center"
+        width="100px"
         sortable
         prop="username"
         label="预约人">
       </el-table-column>
       <el-table-column
+        align="center"
+        width="100px"
         sortable
         prop="name"
-        label="教室名">
+        label="教室">
       </el-table-column>
       <el-table-column
+        align="center"
+        width="150px"
         sortable
         prop="date"
         label="使用日期">
       </el-table-column>
       <el-table-column
-        sortable
+        align="center"
+        width="75"
         prop="course1"
         label="第1节课">
         <template slot-scope="scope">
-          <el-button type="success" icon="el-icon-check" circle v-if="scope.row.course1"></el-button>
+          <el-button type="success" icon="el-icon-check" circle size="small" v-if="scope.row.course1"></el-button>
         </template>
       </el-table-column>
       <el-table-column
-        sortable
+        align="center"
+        width="75"
         prop="course2"
         label="第2节课">
         <template slot-scope="scope">
-          <el-button type="success" icon="el-icon-check" circle v-if="scope.row.course2"></el-button>
+          <el-button type="success" icon="el-icon-check" circle size="small" v-if="scope.row.course2"></el-button>
         </template>
       </el-table-column>
       <el-table-column
-        sortable
+        align="center"
+        width="75"
         prop="course3"
         label="第3节课">
         <template slot-scope="scope">
-          <el-button type="success" icon="el-icon-check" circle v-if="scope.row.course3"></el-button>
+          <el-button type="success" icon="el-icon-check" circle size="small" v-if="scope.row.course3"></el-button>
         </template>
       </el-table-column>
       <el-table-column
-        sortable
+        align="center"
+        width="75"
         prop="course4"
         label="第4节课">
         <template slot-scope="scope">
-          <el-button type="success" icon="el-icon-check" circle v-if="scope.row.course4"></el-button>
+          <el-button type="success" icon="el-icon-check" circle size="small" v-if="scope.row.course4"></el-button>
         </template>
       </el-table-column>
       <el-table-column
-        sortable
+        :show-overflow-tooltip='true'
         prop="reason"
-        label="申请事由"
-        width="200">
+        label="申请事由">
       </el-table-column>
       <el-table-column
+        align="center"
         fixed="right"
         label="操作"
         width="200">
@@ -154,3 +165,8 @@ export default {
   }
 }
 </script>
+
+<style lang="css">
+  /* 表格内文字过多时省略号显示，弹出框显示全部文字时的样式 */
+  .el-tooltip__popper{font-size: 14px; max-width:25% } /*设置显示隐藏部分内容，按50%显示*/
+</style>

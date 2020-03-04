@@ -58,7 +58,7 @@
       :data="list"
       stripe
       border
-      max-height="600"
+      max-height="500"
       v-loading="listLoading">
       <el-table-column
         align="center"
@@ -185,7 +185,7 @@
       @current-change="handleCurrentChange"
       :current-page=currentPage
       :page-sizes="[5, 10, 20]"
-      :page-size="5"
+      :page-size="10"
       layout="total, sizes, prev, pager, next, jumper"
       :total=total>
     </el-pagination>
@@ -201,7 +201,7 @@ export default {
     return {
       total: 0, // 总记录数
       currentPage: 1, // 当前页
-      pageSize: 5, // 每页大小
+      pageSize: 10, // 每页大小
       list: [], // 后端传回数据列表
       id: '', // 数据库id
       dialogSearchVisible: false, // 条件查询对话框是否可见

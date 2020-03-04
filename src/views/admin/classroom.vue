@@ -1,11 +1,28 @@
 <template>
   <div class="app-container">
-    <!-- 查询条件 -->
-    <el-form :inline="true" class="demo-form-inline">
-      <el-form-item>
-        <el-button type="primary" @click="handleEdit('')" icon="el-icon-circle-plus-outline" >新增教室</el-button>
-      </el-form-item>
-    </el-form>
+
+    <el-row>
+      <!-- 查询条件 -->
+      <el-col :xs="8" :sm="6" :lg="4">
+        <el-form :inline="true" class="demo-form-inline">
+          <el-form-item>
+            <el-button type="primary" icon="el-icon-circle-plus-outline" @click="handleEdit('')" class="pan-btn green-btn">新增教室</el-button>
+          </el-form-item>
+        </el-form>
+      </el-col>
+      <!-- 上传 -->
+      <el-col :xs="8" :sm="6" :lg="4">
+        <el-upload
+          action="http://localhost:8081/upload/classroom"
+          ref="upload"
+          :show-file-list="false"
+          :limit="1"
+          :before-upload="beforeExcelUpload"
+          :on-success="handleExcelUploadSuccess">
+          <el-button type="primary" icon="el-icon-upload2" class="pan-btn tiffany-btn"  @click="uploadExcelNotice">批量新增教室</el-button>
+        </el-upload>
+      </el-col>
+    </el-row>
 
     <!-- 新增教室/修改教室对话框 -->
     <el-dialog title="新增教室" :visible.sync="dialogVisible" width="30%">
@@ -29,7 +46,7 @@
             </el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="教室类型">
+        <el-form-item label="预约类型">
           <el-select v-model="pojo.type" placeholder="请选择">
             <el-option
               v-for="item in typeOptions"
@@ -55,39 +72,49 @@
       stripe
       border
       v-loading="listLoading"
-      max-height="480"
+      max-height="500"
       style="width: 100%">
       <el-table-column
         type="index"
-        width="50">
+        align="center"
+        sortable>
       </el-table-column>
       <el-table-column
+        align="center"
         sortable
         prop="name"
-        label="教室名"
-        width="180">
+        label="教室名">
       </el-table-column>
       <el-table-column
+        align="center"
         sortable
         prop="building"
         label="教学楼">
       </el-table-column>
       <el-table-column
+        align="center"
         sortable
         prop="floor"
         label="教室楼层">
       </el-table-column>
       <el-table-column
-        sortable
-        prop="type"
-        label="教室类型">
-      </el-table-column>
-      <el-table-column
+        align="center"
         sortable
         prop="capacity"
         label="教室容量">
       </el-table-column>
       <el-table-column
+        align="center"
+        :show-overflow-tooltip='true'
+        prop="type"
+        label="预约类型">
+        <template slot-scope="scope">
+          <i class="el-icon-user-solid" v-show="scope.row.type">&nbsp;{{'预约教室'}}</i>
+          <i class="el-icon-user" v-show="!scope.row.type">&nbsp;{{'预约座位'}}</i>
+        </template>
+      </el-table-column>
+      <el-table-column
+        align="center"
         sortable
         prop="repair"
         label="是否报修">
@@ -97,11 +124,11 @@
         </template>
       </el-table-column>
       <el-table-column
+        align="center"
         fixed="right"
         label="操作"
         width="200">
         <template slot-scope="scope">
-          <!--        <el-button @click="handleShow(scope.$index, scope.row)" type="text" size="small">查看</el-button>-->
           <el-button type="warning" size="small" @click="handleEdit(scope.row.id)" icon="el-icon-edit">修改</el-button>
           <el-button type="danger" size="small" @click="handleDelete(scope.row.id)" icon="el-icon-delete">删除</el-button>
         </template>
@@ -138,13 +165,13 @@ export default {
       dialogVisible: false, // 弹出框是否可见
       pojo: {}, // 弹出框数据
       listLoading: true, // 加载中动画
-      // 教室类型选项
+      // 教室预约类型
       typeOptions: [{
-        value: '普通教室',
-        label: '普通教室'
+        value: false,
+        label: '预约座位'
       }, {
-        value: '多媒体教室',
-        label: '多媒体教室'
+        value: true,
+        label: '预约教室'
       }],
       buildingOptions: [{
         value: '明德楼',
@@ -211,6 +238,31 @@ export default {
         type: 'warning'
       }).then(() => {
         message.handleShowMessage(classroomApi.deleteById(id), this)
+      })
+    },
+    beforeExcelUpload(file) {
+      const isXLSX = file.type === 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+      const isLt2M = file.size / 1024 / 1024 < 2
+      if (!isXLSX) {
+        this.$message.error('只能上传 XLSX 格式的文件 !')
+      }
+      if (!isLt2M) {
+        this.$message.error('上传文件大小不能超过 2MB !')
+      }
+      return isXLSX && isLt2M
+    },
+    handleExcelUploadSuccess() {
+      this.$refs.upload.clearFiles()
+      this.fetchData()
+      this.$notify.success({
+        title: '成功',
+        message: '上传成功'
+      })
+    },
+    uploadExcelNotice() {
+      this.$notify.info({
+        title: '提示',
+        message: '上传xlsx文件，批量新增教室'
       })
     }
   }
