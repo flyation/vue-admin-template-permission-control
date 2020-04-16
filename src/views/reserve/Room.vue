@@ -243,6 +243,9 @@ export default {
       }, {
         value: '文德楼',
         label: '文德楼'
+      }, {
+        value: '逸夫楼',
+        label: '逸夫楼'
       }],
       marks: {
         50: '50',
@@ -286,6 +289,18 @@ export default {
         if (response.flag === true) {
           this.list = response.data.rows
           this.total = response.data.total
+          // 查询结果的消息提示
+          if (response.data.total) {
+            this.$message({
+              message: `查询成功，共${response.data.total}条结果`,
+              type: 'success'
+            })
+          } else {
+            this.$message({
+              message: `很抱歉，没有满足条件的结果`,
+              type: 'warning'
+            })
+          }
         }
       })
       this.dialogSearchVisible = false // 隐藏窗口

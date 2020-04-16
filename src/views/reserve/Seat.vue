@@ -238,6 +238,9 @@ export default {
       }, {
         value: '文德楼',
         label: '文德楼'
+      }, {
+        value: '逸夫楼',
+        label: '逸夫楼'
       }],
       marks: {
         50: '50',

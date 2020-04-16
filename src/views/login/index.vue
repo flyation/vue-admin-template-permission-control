@@ -120,7 +120,7 @@ export default {
           this.$store.dispatch('user/login', this.loginForm).then(() => {
             this.$router.push({ path: this.redirect || '/' })
             this.loading = false
-            // 欢迎
+            // 登录 消息提醒
             this.$notify.success({
               title: 'Info',
               message: '欢迎回来'
