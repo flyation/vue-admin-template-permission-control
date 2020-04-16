@@ -244,10 +244,16 @@ export default {
       const isXLSX = file.type === 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
       const isLt2M = file.size / 1024 / 1024 < 2
       if (!isXLSX) {
-        this.$message.error('只能上传 XLSX 格式的文件 !')
+        this.$message.error({
+          message: '只能上传 XLSX 格式的文件 !',
+          center: true
+        })
       }
       if (!isLt2M) {
-        this.$message.error('上传文件大小不能超过 2MB !')
+        this.$message.error({
+          message: '上传文件大小不能超过 2MB !',
+          center: true
+        })
       }
       return isXLSX && isLt2M
     },

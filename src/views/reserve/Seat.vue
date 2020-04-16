@@ -4,7 +4,7 @@
     <!-- 查询按钮 -->
     <el-form :inline="true" class="demo-form-inline">
       <el-form-item>
-        <el-button type="primary" icon="el-icon-search" @click="handleSearchOpen()" class="pan-btn green-btn">搜索教室</el-button>
+        <el-button type="primary" icon="el-icon-search" @click="handleSearchOpen()" class="pan-btn tiffany-btn">搜索教室</el-button>
       </el-form-item>
     </el-form>
 
@@ -103,6 +103,10 @@
         sortable
         prop="number1"
         label="第1节课">
+        <template slot-scope="scope">
+          <font color="green" v-show="scope.row.number1 < 10">{{scope.row.number1}} 人</font>
+          <font color="red" v-show="scope.row.number1 > 10">{{scope.row.number1}} 人</font>
+        </template>
       </el-table-column>
 
       <el-table-column
@@ -110,6 +114,10 @@
         sortable
         prop="number2"
         label="第2节课">
+        <template slot-scope="scope">
+          <font color="green" v-show="scope.row.number2 < 10">{{scope.row.number2}} 人</font>
+          <font color="red" v-show="scope.row.number2 > 10">{{scope.row.number2}} 人</font>
+        </template>
       </el-table-column>
 
       <el-table-column
@@ -117,6 +125,10 @@
         sortable
         prop="number3"
         label="第3节课">
+        <template slot-scope="scope">
+          <font color="green" v-show="scope.row.number3 < 10">{{scope.row.number3}} 人</font>
+          <font color="red" v-show="scope.row.number3 > 10">{{scope.row.number3}} 人</font>
+        </template>
       </el-table-column>
 
       <el-table-column
@@ -124,6 +136,10 @@
         sortable
         prop="number4"
         label="第4节课">
+        <template slot-scope="scope">
+          <font color="green" v-show="scope.row.number4 < 10">{{scope.row.number4}} 人</font>
+          <font color="red" v-show="scope.row.number4 > 10">{{scope.row.number4}} 人</font>
+        </template>
       </el-table-column>
 
       <el-table-column

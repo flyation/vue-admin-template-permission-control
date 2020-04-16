@@ -94,26 +94,26 @@ export const constantRoutes = [
     path: '/reserve',
     component: Layout,
     redirect: '/reserve/index',
+    meta: { title: '预约选择', icon: 'table' },
     children: [
       {
         path: 'index',
         name: 'Reserve',
         component: () => import('@/views/reserve/index'),
-        meta: { title: '预约选择', icon: 'table' }
+        meta: { title: '预约选择', icon: 'table' },
+        hidden: true
       },
       {
         path: 'room',
         name: 'Room',
         component: () => import('@/views/reserve/Room'),
-        meta: { title: '预约教室', icon: 'table' },
-        hidden: true
+        meta: { title: '预约教室', icon: 'table' }
       },
       {
         path: 'seat',
         name: 'Seat',
         component: () => import('@/views/reserve/Seat'),
-        meta: { title: '预约座位', icon: 'table' },
-        hidden: true
+        meta: { title: '预约座位', icon: 'table' }
       }
     ]
   },

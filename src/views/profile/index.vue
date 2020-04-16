@@ -31,7 +31,7 @@
         prop="course1"
         label="第1节课">
         <template slot-scope="scope">
-          <el-button type="success" icon="el-icon-check" circle size="small" v-if="scope.row.course1"></el-button>
+          <el-button type="primary" icon="el-icon-check" circle size="small" v-if="scope.row.course1"></el-button>
         </template>
       </el-table-column>
       <el-table-column
@@ -40,7 +40,7 @@
         prop="course2"
         label="第2节课">
         <template slot-scope="scope">
-          <el-button type="success" icon="el-icon-check" circle size="small" v-if="scope.row.course2"></el-button>
+          <el-button type="primary" icon="el-icon-check" circle size="small" v-if="scope.row.course2"></el-button>
         </template>
       </el-table-column>
       <el-table-column
@@ -49,7 +49,7 @@
         prop="course3"
         label="第3节课">
         <template slot-scope="scope">
-          <el-button type="success" icon="el-icon-check" circle size="small" v-if="scope.row.course3"></el-button>
+          <el-button type="primary" icon="el-icon-check" circle size="small" v-if="scope.row.course3"></el-button>
         </template>
       </el-table-column>
       <el-table-column
@@ -58,7 +58,7 @@
         prop="course4"
         label="第4节课">
         <template slot-scope="scope">
-          <el-button type="success" icon="el-icon-check" circle size="small" v-if="scope.row.course4"></el-button>
+          <el-button type="primary" icon="el-icon-check" circle size="small" v-if="scope.row.course4"></el-button>
         </template>
       </el-table-column>
 
@@ -86,11 +86,16 @@
         prop="checked"
         label="审核状态">
         <template slot-scope="scope">
-          <div v-if="scope.row.cancel">已取消</div>
+          <div v-if="scope.row.cancel">
+            <el-tag type="warning">取消</el-tag>
+          </div>
           <div v-else>
-            <font color="#b8860b"><b>{{ scope.row.checked === "待审" ?  '待审': '' }}</b></font>
-            <font color="#228b22"><b>{{ scope.row.checked === "通过" ?  '通过': '' }}</b></font>
-            <font color="#dc143c"><b>{{ scope.row.checked === "否决" ?  '否决': '' }}</b></font>
+            <el-tag type="primary" v-show="scope.row.checked === '待审'">待审</el-tag>
+            <el-tag type="success" v-show="scope.row.checked === '通过'">通过</el-tag>
+            <el-tag type="danger" v-show="scope.row.checked === '否决'">否决</el-tag>
+<!--            <font color="#b8860b"><b>{{ scope.row.checked === "待审" ?  '待审': '' }}</b></font>-->
+<!--            <font color="#228b22"><b>{{ scope.row.checked === "通过" ?  '通过': '' }}</b></font>-->
+<!--            <font color="#dc143c"><b>{{ scope.row.checked === "否决" ?  '否决': '' }}</b></font>-->
           </div>
         </template>
       </el-table-column>

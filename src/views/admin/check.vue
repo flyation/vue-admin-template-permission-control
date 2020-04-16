@@ -41,7 +41,7 @@
         prop="course1"
         label="第1节课">
         <template slot-scope="scope">
-          <el-button type="success" icon="el-icon-check" circle size="small" v-if="scope.row.course1"></el-button>
+          <el-button type="primary" icon="el-icon-check" circle size="small" v-if="scope.row.course1"></el-button>
         </template>
       </el-table-column>
       <el-table-column
@@ -50,7 +50,7 @@
         prop="course2"
         label="第2节课">
         <template slot-scope="scope">
-          <el-button type="success" icon="el-icon-check" circle size="small" v-if="scope.row.course2"></el-button>
+          <el-button type="primary" icon="el-icon-check" circle size="small" v-if="scope.row.course2"></el-button>
         </template>
       </el-table-column>
       <el-table-column
@@ -59,7 +59,7 @@
         prop="course3"
         label="第3节课">
         <template slot-scope="scope">
-          <el-button type="success" icon="el-icon-check" circle size="small" v-if="scope.row.course3"></el-button>
+          <el-button type="primary" icon="el-icon-check" circle size="small" v-if="scope.row.course3"></el-button>
         </template>
       </el-table-column>
       <el-table-column
@@ -68,7 +68,7 @@
         prop="course4"
         label="第4节课">
         <template slot-scope="scope">
-          <el-button type="success" icon="el-icon-check" circle size="small" v-if="scope.row.course4"></el-button>
+          <el-button type="primary" icon="el-icon-check" circle size="small" v-if="scope.row.course4"></el-button>
         </template>
       </el-table-column>
       <el-table-column
@@ -82,7 +82,7 @@
         label="操作"
         width="200">
         <template slot-scope="scope">
-          <el-button type="warning" size="small" @click="handleCheckOpen(scope.row.id, true)" icon="el-icon-check">通过</el-button>
+          <el-button type="success" size="small" @click="handleCheckOpen(scope.row.id, true)" icon="el-icon-check">通过</el-button>
           <el-button type="danger" size="small" @click="handleCheckOpen(scope.row.id, false)" icon="el-icon-close">否决</el-button>
         </template>
       </el-table-column>

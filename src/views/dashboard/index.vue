@@ -3,9 +3,6 @@
     <div class="dashboard-text">name: {{ name }}</div>
     <div class="dashboard-text">roles: <span v-for="role in roles" :key="role">{{ role }}</span></div>
     <mallki class-name="mallki-text" :text="this.$store.state.user.avatar" />
-    <router-link class="pan-btn blue-btn" to="/documentation/index">
-      Documentation123
-    </router-link>
   </div>
 </template>
 

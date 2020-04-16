@@ -189,7 +189,7 @@
         </el-form-item>
 
         <el-form-item label="预约原因">
-          <el-input v-model="pojo.reason" type="textarea" autosize placeholder="请输入内容"></el-input>
+          <el-input v-model="pojo.reason" type="textarea" :autosize="{ minRows: 3, maxRows: 5}" placeholder="请输入内容"></el-input>
         </el-form-item>
       </el-form>
       <span slot="footer" class="dialog-footer">
