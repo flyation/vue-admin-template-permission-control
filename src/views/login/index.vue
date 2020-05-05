@@ -194,8 +194,7 @@ $light_gray:#eee;
   min-height: 100%;
   width: 100%;
   background-color: $bg;
-  //background-image: url("../../assets/bg/timg.jpg");
-  //background-image: url("../../assets/bg/nuist42.jpg");
+  background-image: url("../../assets/bg/nuist40.jpg");
   background-size: cover;
   overflow: hidden;
 

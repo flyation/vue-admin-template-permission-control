@@ -94,7 +94,7 @@ export const constantRoutes = [
     path: '/reserve',
     component: Layout,
     redirect: '/reserve/index',
-    meta: { title: '预约选择', icon: 'table' },
+    meta: { title: '预约选择', icon: 'table', activeMenu: 2 },
     children: [
       {
         path: 'index',

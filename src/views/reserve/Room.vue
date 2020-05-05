@@ -270,6 +270,8 @@ export default {
     // 抓取列表数据
     fetchData() {
       this.listLoading = true
+      // 设置查询日期为今天
+      this.searchMap.date = new Date()
       reserveApi.getScheduleRoomList(this.currentPage, this.pageSize, this.searchMap).then(response => {
         if (response.flag === true) {
           this.list = response.data.rows
@@ -321,8 +323,16 @@ export default {
     },
     // 教室预约对话框确认
     handleReserveSubmit() {
-      message.handleShowMessage(reserveApi.apply(this.pojo), this)
-      this.dialogReserveVisible = false // 隐藏窗口
+      // 表单验证，要选择至少一个时间段
+      if (!this.pojo.course1 && !this.pojo.course3 && !this.pojo.course4 && !this.pojo.course4) {
+        this.$message({
+          message: '请至少选择一个时间段！',
+          type: 'warning'
+        })
+      } else {
+        message.handleShowMessage(reserveApi.apply(this.pojo), this)
+        this.dialogReserveVisible = false // 隐藏窗口
+      }
     }
   }
 }
