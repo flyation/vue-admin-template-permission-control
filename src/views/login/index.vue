@@ -1,10 +1,10 @@
 <template>
   <div class="login-container">
-    <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form" auto-complete="on" label-position="left">
+<!--    <h1 align="center"><font color="#6495ed">教室管理系统</font></h1>-->
 
+    <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form" auto-complete="on" label-position="left">
       <div class="title-container">
         <h3 class="title"><mallki class-name="mallki-text" text="教室管理系统" v-if="true" /></h3>
-<!--        <h3 class="title">教室管理系统</h3>-->
       </div>
 
       <el-form-item prop="username">
@@ -48,7 +48,6 @@
 <!--        <span style="margin-right:20px;">username: admin</span>-->
 <!--        <span> password: any</span>-->
         <span v-show="false">background-color: $bg;</span>
-        <span >Fly</span>
         <h3 class="title"><mallki class-name="mallki-text" text="教室管理系统" v-if="false" /></h3>
       </div>
 
@@ -194,7 +193,8 @@ $light_gray:#eee;
   min-height: 100%;
   width: 100%;
   background-color: $bg;
-  background-image: url("../../assets/bg/nuist40.jpg");
+  /*background-image: url("../../assets/bg/nuist40.jpg");*/
+  background-image: url("../../assets/bg/5.jpg");
   background-size: cover;
   overflow: hidden;
 
