@@ -55,32 +55,10 @@ export const constantRoutes = [
     }]
   },
 
-  // {
-  //   path: '/example',
-  //   component: Layout,
-  //   redirect: '/example/table',
-  //   name: 'Example',
-  //   meta: { title: 'Example', icon: 'example' },
-  //   children: [
-  //     {
-  //       path: 'table',
-  //       name: 'Table',
-  //       component: () => import('@/views/table/index'),
-  //       meta: { title: 'Table', icon: 'table' }
-  //     },
-  //     {
-  //       path: 'tree',
-  //       name: 'Tree',
-  //       component: () => import('@/views/tree/index'),
-  //       meta: { title: 'Tree', icon: 'tree' }
-  //     }
-  //   ]
-  // },
-  //
   {
     path: '/qr',
     component: Layout,
-    // hidden: true,
+    hidden: true,
     children: [
       {
         path: 'room/:cid',
@@ -92,44 +70,17 @@ export const constantRoutes = [
   },
 
   {
-    path: '/reserve',
-    component: Layout,
-    redirect: '/reserve/index',
-    meta: { title: '预约选择', icon: 'table', activeMenu: 2 },
-    children: [
-      {
-        path: 'index',
-        name: 'Reserve',
-        component: () => import('@/views/reserve/index'),
-        meta: { title: '预约选择', icon: 'table' },
-        hidden: true
-      },
-      {
-        path: 'room',
-        name: 'Room',
-        component: () => import('@/views/reserve/Room'),
-        meta: { title: '预约教室', icon: 'table' }
-      },
-      {
-        path: 'seat',
-        name: 'Seat',
-        component: () => import('@/views/reserve/Seat'),
-        meta: { title: '预约座位', icon: 'table' }
-      }
-    ]
-  },
-
-  {
     path: '/profile',
     component: Layout,
     name: 'User',
-    meta: { title: '个人中心', icon: 'example' },
+    alwaysShow: true, // 一直显示根路由
+    meta: { title: '个人中心', icon: 'user' },
     children: [
       {
         path: 'index',
         name: 'Record',
         component: () => import('@/views/profile/index'),
-        meta: { title: '预约记录', icon: 'table' }
+        meta: { title: '预约记录', icon: 'documentation' }
       }
     ]
   }
@@ -140,95 +91,57 @@ export const constantRoutes = [
  * the routes that need to be dynamically loaded based on user roles
  */
 export const asyncRoutes = [
-  // {
-  //   path: '/nested',
-  //   component: Layout,
-  //   redirect: '/nested/menu1',
-  //   name: 'Nested',
-  //   meta: {
-  //     title: 'Nested',
-  //     icon: 'nested',
-  //     roles: 'PanJiaChen'
-  //   },
-  //   children: [
-  //     {
-  //       path: 'menu1',
-  //       component: () => import('@/views/nested/menu1/index'), // Parent router-view
-  //       name: 'Menu1',
-  //       meta: { title: 'Menu1' },
-  //       children: [
-  //         {
-  //           path: 'menu1-1',
-  //           component: () => import('@/views/nested/menu1/menu1-1'),
-  //           name: 'Menu1-1',
-  //           meta: { title: 'Menu1-1' }
-  //         },
-  //         {
-  //           path: 'menu1-2',
-  //           component: () => import('@/views/nested/menu1/menu1-2'),
-  //           name: 'Menu1-2',
-  //           meta: { title: 'Menu1-2' },
-  //           children: [
-  //             {
-  //               path: 'menu1-2-1',
-  //               component: () => import('@/views/nested/menu1/menu1-2/menu1-2-1'),
-  //               name: 'Menu1-2-1',
-  //               meta: { title: 'Menu1-2-1' }
-  //             },
-  //             {
-  //               path: 'menu1-2-2',
-  //               component: () => import('@/views/nested/menu1/menu1-2/menu1-2-2'),
-  //               name: 'Menu1-2-2',
-  //               meta: { title: 'Menu1-2-2' }
-  //             }
-  //           ]
-  //         },
-  //         {
-  //           path: 'menu1-3',
-  //           component: () => import('@/views/nested/menu1/menu1-3'),
-  //           name: 'Menu1-3',
-  //           meta: { title: 'Menu1-3' }
-  //         }
-  //       ]
-  //     },
-  //     {
-  //       path: 'menu2',
-  //       component: () => import('@/views/nested/menu2/index'),
-  //       meta: { title: 'menu2' }
-  //     }
-  //   ]
-  // },
-  //
-  // {
-  //   path: 'external-link',
-  //   component: Layout,
-  //   meta: { roles: 'PanJiaChen' },
-  //   children: [
-  //     {
-  //       path: 'https://panjiachen.github.io/vue-element-admin-site/#/',
-  //       meta: { title: 'External Link', icon: 'link' }
-  //     }
-  //   ]
-  // },
+  {
+    path: '/reserve',
+    component: Layout,
+    redirect: '/reserve/index',
+    meta: { title: '预约选择', icon: 'guide', activeMenu: 2, roles: ['admin', 'teacher', 'editor'] },
+    children: [
+      {
+        path: 'index',
+        name: 'Reserve',
+        component: () => import('@/views/reserve/index'),
+        meta: { title: '模式选择', icon: 'example', roles: ['admin', 'teacher', 'editor'] },
+      },
+      {
+        path: 'room',
+        name: 'Room',
+        component: () => import('@/views/reserve/Room'),
+        meta: { title: '预约教室', icon: 'tab', roles: ['admin', 'teacher'] }
+      },
+      {
+        path: 'seat',
+        name: 'Seat',
+        component: () => import('@/views/reserve/Seat'),
+        meta: { title: '预约座位', icon: 'table', roles: ['admin', 'teacher', 'editor'] }
+      }
+    ]
+  },
 
   {
     path: '/admin',
     component: Layout,
     redirect: '/admin/check',
     name: 'Admin',
-    meta: { title: '管理中心', icon: 'example', roles: 'admin' },
+    meta: { title: '管理中心', icon: 'edit', roles: 'admin' },
     children: [
       {
         path: 'check',
         name: 'Check',
         component: () => import('@/views/admin/check'),
-        meta: { title: '预约审核', icon: 'table' }
+        meta: { title: '预约审核', icon: 'list' }
       },
       {
         path: 'classroom',
         name: 'Classroom',
         component: () => import('@/views/admin/classroom'),
-        meta: { title: '教室管理', icon: 'table' }
+        meta: { title: '教室管理', icon: 'documentation' }
+      },
+      {
+        path: 'user',
+        name: 'User',
+        component: () => import('@/views/admin/user'),
+        meta: { title: '用户管理', icon: 'clipboard' }
       }
     ]
   },

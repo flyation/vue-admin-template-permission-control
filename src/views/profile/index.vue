@@ -14,20 +14,18 @@
       <el-table-column
         sortable
         align="center"
-        width="80"
         prop="name"
         label="教室">
       </el-table-column>
       <el-table-column
         sortable
         align="center"
-        width="110"
         prop="date"
-        label="使用日期">
+        label="日期">
       </el-table-column>
       <el-table-column
+        width="80%"
         align="center"
-        width="75"
         prop="course1"
         label="第1节课">
         <template slot-scope="scope">
@@ -35,8 +33,8 @@
         </template>
       </el-table-column>
       <el-table-column
+        width="80%"
         align="center"
-        width="75"
         prop="course2"
         label="第2节课">
         <template slot-scope="scope">
@@ -44,8 +42,8 @@
         </template>
       </el-table-column>
       <el-table-column
+        width="80%"
         align="center"
-        width="75"
         prop="course3"
         label="第3节课">
         <template slot-scope="scope">
@@ -53,8 +51,8 @@
         </template>
       </el-table-column>
       <el-table-column
+        width="80%"
         align="center"
-        width="75"
         prop="course4"
         label="第4节课">
         <template slot-scope="scope">
@@ -63,15 +61,16 @@
       </el-table-column>
 
       <el-table-column
+        align="center"
         :show-overflow-tooltip='true'
         prop="reason"
+        width="300%"
         label="申请事由">
       </el-table-column>
 
       <el-table-column
         :show-overflow-tooltip='true'
         align="center"
-        width="100px"
         prop="type"
         label="预约类型">
         <template slot-scope="scope">
@@ -82,7 +81,6 @@
 
       <el-table-column
         align="center"
-        width="80"
         prop="checked"
         label="审核状态">
         <template slot-scope="scope">
@@ -93,9 +91,6 @@
             <el-tag type="primary" v-show="scope.row.checked === '待审'">待审</el-tag>
             <el-tag type="success" v-show="scope.row.checked === '通过'">通过</el-tag>
             <el-tag type="danger" v-show="scope.row.checked === '否决'">否决</el-tag>
-<!--            <font color="#b8860b"><b>{{ scope.row.checked === "待审" ?  '待审': '' }}</b></font>-->
-<!--            <font color="#228b22"><b>{{ scope.row.checked === "通过" ?  '通过': '' }}</b></font>-->
-<!--            <font color="#dc143c"><b>{{ scope.row.checked === "否决" ?  '否决': '' }}</b></font>-->
           </div>
         </template>
       </el-table-column>
@@ -103,15 +98,15 @@
       <el-table-column
         sortable
         align="center"
-        width="160"
         prop="time1"
+        width="200%"
         label="申请时间">
       </el-table-column>
 
       <el-table-column
         align="center"
         fixed="right"
-        width="180"
+        width="200%"
         label="操作">
         <template slot-scope="scope">
           <el-button type="primary" size="small" @click="handleDetail(scope.row)" icon="el-icon-document">流程</el-button>

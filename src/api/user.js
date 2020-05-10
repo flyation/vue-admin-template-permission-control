@@ -22,3 +22,25 @@ export function logout() {
     method: 'post'
   })
 }
+
+export function getUserList() {
+  return request({
+    url: '/user/all',
+    method: 'get'
+  })
+}
+
+export function getUser(uid) {
+  return request({
+    url: `/user/${uid}`,
+    method: 'get'
+  })
+}
+
+export function updateUser(pojo) {
+  return request({
+    url: `/user/update`,
+    method: 'post',
+    data: pojo
+  })
+}
