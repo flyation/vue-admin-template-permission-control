@@ -2,16 +2,16 @@
   <div class="app-container">
 
     <el-row>
-      <!-- 查询条件 -->
-      <el-col :xs="8" :sm="6" :lg="4">
+      <!-- 新增教室 -->
+      <el-col :xs="8" :sm="6" :lg="3">
         <el-form :inline="true" class="demo-form-inline">
           <el-form-item>
             <el-button type="primary" icon="el-icon-circle-plus-outline" @click="handleEdit('')" class="pan-btn green-btn">新增教室</el-button>
           </el-form-item>
         </el-form>
       </el-col>
-      <!-- 上传 -->
-      <el-col :xs="8" :sm="6" :lg="4">
+      <!-- 批量新增教室 -->
+      <el-col :xs="8" :sm="6" :lg="3">
         <el-upload
           action="http://localhost:8081/upload/classroom"
           ref="upload"
@@ -20,6 +20,18 @@
           :before-upload="beforeExcelUpload"
           :on-success="handleExcelUploadSuccess">
           <el-button type="primary" icon="el-icon-upload2" class="pan-btn tiffany-btn"  @click="uploadExcelNotice">批量新增教室</el-button>
+        </el-upload>
+      </el-col>
+      <!-- 批量新增日程 -->
+      <el-col :xs="8" :sm="6" :lg="3">
+        <el-upload
+          action="http://localhost:8081/upload/schedule"
+          ref="upload"
+          :show-file-list="false"
+          :limit="1"
+          :before-upload="beforeExcelUpload"
+          :on-success="handleExcelUploadSuccess">
+          <el-button type="primary" icon="el-icon-upload2" class="pan-btn tiffany-btn"  @click="uploadExcelNotice">批量新增日程</el-button>
         </el-upload>
       </el-col>
     </el-row>
@@ -242,20 +254,20 @@ export default {
     },
     beforeExcelUpload(file) {
       const isXLSX = file.type === 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
-      const isLt2M = file.size / 1024 / 1024 < 2
+      const isLt5M = file.size / 1024 / 1024 < 5
       if (!isXLSX) {
         this.$message.error({
           message: '只能上传 XLSX 格式的文件 !',
           center: true
         })
       }
-      if (!isLt2M) {
+      if (!isLt5M) {
         this.$message.error({
-          message: '上传文件大小不能超过 2MB !',
+          message: '上传文件大小不能超过 5MB !',
           center: true
         })
       }
-      return isXLSX && isLt2M
+      return isXLSX && isLt5M
     },
     handleExcelUploadSuccess() {
       this.$refs.upload.clearFiles()
@@ -268,7 +280,7 @@ export default {
     uploadExcelNotice() {
       this.$notify.info({
         title: '提示',
-        message: '上传xlsx文件，批量新增教室'
+        message: '上传xlsx文件，批量新增'
       })
     }
   }

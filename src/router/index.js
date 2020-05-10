@@ -101,7 +101,7 @@ export const asyncRoutes = [
         path: 'index',
         name: 'Reserve',
         component: () => import('@/views/reserve/index'),
-        meta: { title: '模式选择', icon: 'example', roles: ['admin', 'teacher', 'editor'] },
+        meta: { title: '模式选择', icon: 'example', roles: ['admin', 'teacher', 'editor'] }
       },
       {
         path: 'room',

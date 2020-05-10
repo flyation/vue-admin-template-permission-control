@@ -105,7 +105,7 @@
         label="第1节课">
         <template slot-scope="scope">
           <font color="green" v-show="scope.row.number1 < 10">{{scope.row.number1}} 人</font>
-          <font color="red" v-show="scope.row.number1 > 10">{{scope.row.number1}} 人</font>
+          <font color="red" v-show="scope.row.number1 >= 10">{{scope.row.number1}} 人</font>
         </template>
       </el-table-column>
 
@@ -116,7 +116,7 @@
         label="第2节课">
         <template slot-scope="scope">
           <font color="green" v-show="scope.row.number2 < 10">{{scope.row.number2}} 人</font>
-          <font color="red" v-show="scope.row.number2 > 10">{{scope.row.number2}} 人</font>
+          <font color="red" v-show="scope.row.number2 >= 10">{{scope.row.number2}} 人</font>
         </template>
       </el-table-column>
 
@@ -127,7 +127,7 @@
         label="第3节课">
         <template slot-scope="scope">
           <font color="green" v-show="scope.row.number3 < 10">{{scope.row.number3}} 人</font>
-          <font color="red" v-show="scope.row.number3 > 10">{{scope.row.number3}} 人</font>
+          <font color="red" v-show="scope.row.number3 >= 10">{{scope.row.number3}} 人</font>
         </template>
       </el-table-column>
 
@@ -138,7 +138,7 @@
         label="第4节课">
         <template slot-scope="scope">
           <font color="green" v-show="scope.row.number4 < 10">{{scope.row.number4}} 人</font>
-          <font color="red" v-show="scope.row.number4 > 10">{{scope.row.number4}} 人</font>
+          <font color="red" v-show="scope.row.number4 >= 10">{{scope.row.number4}} 人</font>
         </template>
       </el-table-column>
 
@@ -314,7 +314,7 @@ export default {
           type: 'warning'
         })
       } else {
-        message.handleShowMessage(reserveApi.apply(this.pojo), this)
+        message.handleShowMessage(reserveApi.applySeat(this.pojo), this)
         this.dialogReserveVisible = false // 隐藏窗口
       }
     }
