@@ -30,7 +30,7 @@
     </span>
     </el-dialog>
 
-    <!-- 教室表格 -->
+    <!-- 用户表格 -->
     <el-table
       :data="list"
       stripe
@@ -59,6 +59,12 @@
         sortable
         prop="role"
         label="角色">
+        <template slot-scope="scope">
+          <el-tag type="primary" v-show="scope.row.role === 'admin'">管理员</el-tag>
+          <el-tag type="success" v-show="scope.row.role === 'teacher'">老师</el-tag>
+          <el-tag type="warning" v-show="scope.row.role === 'editor'">学生</el-tag>
+        </template>
+
       </el-table-column>
       <el-table-column
         align="center"
@@ -112,7 +118,6 @@ export default {
       getUserList().then(response => {
         if (response.flag === true) {
           this.list = response.data
-          console.log(this.list)
         }
         this.listLoading = false
       })

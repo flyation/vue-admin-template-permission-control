@@ -51,5 +51,14 @@ export default {
       url: `/reserve/cancel/${id}`,
       method: 'put'
     })
+  },
+
+  // 提交报修申请
+  repair(classroom) {
+    return request({
+      url: `/repair/detail`,
+      method: 'post',
+      data: classroom
+    })
   }
 }

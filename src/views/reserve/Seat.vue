@@ -55,6 +55,7 @@
 
     <!-- 日程表格 绑定数据：list -->
     <el-table
+      @cell-dblclick="handleRepairOpen"
       :data="list"
       stripe
       border
@@ -193,6 +194,34 @@
     </span>
     </el-dialog>
 
+    <!-- 教室报修对话框 绑定数据：classroom -->
+    <el-dialog title="教室报修" :visible.sync="dialogRepairVisible" width="30%">
+      <el-form :model="classroom" label-width="80px">
+        <el-form-item label="教室名">
+          <font color="#6495ed">{{classroom.name}}</font>
+        </el-form-item>
+        <!--        <el-form-item label="图片" prop="file">-->
+        <!--          <el-upload-->
+        <!--            :on-change="handleChange"-->
+        <!--            :auto-upload="false"-->
+        <!--            class="upload-demo"-->
+        <!--            drag-->
+        <!--            action="https://jsonplaceholder.typicode.com/posts/">-->
+        <!--            <i class="el-icon-upload"></i>-->
+        <!--            <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>-->
+        <!--            <div class="el-upload__tip" slot="tip">只能上传jpg/png文件，且不超过500kb</div>-->
+        <!--          </el-upload>-->
+        <!--        </el-form-item>-->
+        <el-form-item label="报修详情">
+          <el-input v-model="classroom.detail" type="textarea" :autosize="{ minRows: 3, maxRows: 5}" placeholder="请输入内容"></el-input>
+        </el-form-item>
+      </el-form>
+      <span slot="footer" class="dialog-footer">
+      <el-button @click="dialogRepairVisible = false">取 消</el-button>
+      <el-button type="primary" @click="handleRepairSubmit">确 定</el-button>
+    </span>
+    </el-dialog>
+
     <!-- 分页 -->
     <br>
     <el-pagination
@@ -222,8 +251,10 @@ export default {
       id: '', // 数据库id
       dialogSearchVisible: false, // 条件查询对话框是否可见
       dialogReserveVisible: false, // 预约申请对话框是否可见
+      dialogRepairVisible: false, // 教室报修对话框是否可见
       dialogVisible: false,
       pojo: {}, // 预约申请表单绑定的实体对象
+      classroom: {}, // 教室报修表单绑定的实体对象
       listLoading: true, // 加载中动画
       typeOptions: [{
         value: '普通教室',
@@ -316,6 +347,28 @@ export default {
       } else {
         message.handleShowMessage(reserveApi.applySeat(this.pojo), this)
         this.dialogReserveVisible = false // 隐藏窗口
+      }
+    },
+    // 教室报修对话框打开
+    handleRepairOpen(row, cell) {
+      if (cell.property === 'name') {
+        this.dialogRepairVisible = true
+        this.classroom = row
+        console.log(row)
+      }
+    },
+    // 教室报修对话框确认
+    handleRepairSubmit() {
+      console.log(this.classroom)
+      // 表单验证，必填报修详情
+      if (!this.classroom.detail) {
+        this.$message({
+          message: '请填写报修详情！',
+          type: 'warning'
+        })
+      } else {
+        message.handleShowMessage(reserveApi.repair(this.classroom), this)
+        this.dialogRepairVisible = false // 隐藏窗口
       }
     }
   }

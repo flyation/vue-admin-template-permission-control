@@ -97,12 +97,12 @@ export const asyncRoutes = [
     redirect: '/reserve/index',
     meta: { title: '预约选择', icon: 'guide', activeMenu: 2, roles: ['admin', 'teacher', 'editor'] },
     children: [
-      {
-        path: 'index',
-        name: 'Reserve',
-        component: () => import('@/views/reserve/index'),
-        meta: { title: '模式选择', icon: 'example', roles: ['admin', 'teacher', 'editor'] }
-      },
+      // {
+      //   path: 'index',
+      //   name: 'Reserve',
+      //   component: () => import('@/views/reserve/index'),
+      //   meta: { title: '模式选择', icon: 'example', roles: ['admin', 'teacher', 'editor'] }
+      // },
       {
         path: 'room',
         name: 'Room',
@@ -129,7 +129,13 @@ export const asyncRoutes = [
         path: 'check',
         name: 'Check',
         component: () => import('@/views/admin/check'),
-        meta: { title: '预约审核', icon: 'list' }
+        meta: { title: '预约审核', icon: 'edit' }
+      },
+      {
+        path: 'repair',
+        name: 'Repair',
+        component: () => import('@/views/admin/repair'),
+        meta: { title: '报修记录', icon: 'list' }
       },
       {
         path: 'classroom',
