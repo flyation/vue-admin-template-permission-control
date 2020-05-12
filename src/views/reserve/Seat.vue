@@ -9,7 +9,7 @@
     </el-form>
 
     <!-- 条件查询对话框 绑定数据：searchMap -->
-    <el-dialog title="条件查询" :visible.sync="dialogSearchVisible" width="380px">
+    <el-dialog title="条件查询" :visible.sync="dialogSearchVisible" width="30%">
       <el-form :model="searchMap" label-width="100px">
         <el-form-item label="选择日期">
           <el-date-picker
@@ -70,6 +70,9 @@
         sortable
         prop="name"
         label="教室名">
+        <template slot-scope="scope">
+          <font color="#409EFF">{{scope.row.name}}</font>
+        </template>
       </el-table-column>
       <el-table-column
         align="center"
@@ -161,6 +164,7 @@
           <el-date-picker
             v-model="pojo.date"
             type="date"
+            disabled
             placeholder="选择日期">
           </el-date-picker>
         </el-form-item>

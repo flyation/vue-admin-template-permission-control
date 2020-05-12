@@ -7,7 +7,7 @@
       stripe
       border
       v-loading="listLoading"
-      max-height="480"
+      max-height="570"
       style="width: 100%">
       <el-table-column
         align="center"

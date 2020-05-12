@@ -101,7 +101,6 @@ export default {
     }
   },
   created() {
-    alert(111)
     // 获取url中的教室id
     const cid = this.$route.params.cid
     // id为查询教室的id

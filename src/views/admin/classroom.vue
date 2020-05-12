@@ -3,7 +3,7 @@
 
     <el-row>
       <!-- 新增教室 -->
-      <el-col :xs="8" :sm="6" :lg="3">
+      <el-col :xs="8" :sm="6" :lg="4">
         <el-form :inline="true" class="demo-form-inline">
           <el-form-item>
             <el-button type="primary" icon="el-icon-circle-plus-outline" @click="handleEdit('')" class="pan-btn green-btn">新增教室</el-button>
@@ -11,7 +11,7 @@
         </el-form>
       </el-col>
       <!-- 批量新增教室 -->
-      <el-col :xs="8" :sm="6" :lg="3">
+      <el-col :xs="8" :sm="6" :lg="4">
         <el-upload
           action="http://localhost:8081/upload/classroom"
           ref="upload"

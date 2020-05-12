@@ -18,18 +18,21 @@
         align="center"
         sortable
         prop="name"
+        width="200%"
         label="教室名">
       </el-table-column>
       <el-table-column
         align="center"
         sortable
         prop="building"
+        width="200%"
         label="教学楼">
       </el-table-column>
       <el-table-column
         align="center"
         sortable
         prop="date"
+        width="200%"
         label="报修时间">
       </el-table-column>
       <el-table-column

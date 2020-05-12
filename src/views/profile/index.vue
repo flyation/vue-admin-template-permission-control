@@ -8,11 +8,13 @@
       max-height="570"
       v-loading="listLoading">
       <el-table-column
+        fixed
         align="center"
         type="index">
       </el-table-column>
       <el-table-column
         sortable
+        fixed
         align="center"
         prop="name"
         label="教室">
@@ -21,6 +23,7 @@
         sortable
         align="center"
         prop="date"
+        width="100%"
         label="日期">
       </el-table-column>
       <el-table-column
@@ -61,17 +64,10 @@
       </el-table-column>
 
       <el-table-column
-        align="center"
-        :show-overflow-tooltip='true'
-        prop="reason"
-        width="300%"
-        label="申请事由">
-      </el-table-column>
-
-      <el-table-column
         :show-overflow-tooltip='true'
         align="center"
         prop="type"
+        width="100%"
         label="预约类型">
         <template slot-scope="scope">
           <i class="el-icon-user-solid" v-show="scope.row.type">&nbsp;{{'预约教室'}}</i>
@@ -82,7 +78,8 @@
       <el-table-column
         align="center"
         prop="checked"
-        label="审核状态">
+        sortable
+        label="状态">
         <template slot-scope="scope">
           <div v-if="scope.row.cancel">
             <el-tag type="warning">取消</el-tag>
@@ -101,6 +98,14 @@
         prop="time1"
         width="200%"
         label="申请时间">
+      </el-table-column>
+
+      <el-table-column
+        align="center"
+        :show-overflow-tooltip='true'
+        prop="reason"
+        width="300%"
+        label="申请事由">
       </el-table-column>
 
       <el-table-column
@@ -130,7 +135,7 @@
     <el-dialog
       title="时间线"
       :visible.sync="dialogDetailVisible"
-      width="30%">
+      width="25%">
       <el-timeline>
         <el-timeline-item
           v-for="(activity, index) in activities"
