@@ -104,7 +104,7 @@ export default {
     // 教室预约确认
     handleReserveSubmit() {
       // 表单验证，要选择至少一个时间段
-      if (!this.pojo.course1 && !this.pojo.course3 && !this.pojo.course4 && !this.pojo.course4) {
+      if (!this.pojo.course1 && !this.pojo.course2 && !this.pojo.course3 && !this.pojo.course4) {
         this.$message({
           message: '请至少选择一个时间段！',
           type: 'warning'
