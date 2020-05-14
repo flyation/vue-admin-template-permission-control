@@ -11,30 +11,6 @@
       </el-card>
       <br>
 
-<!--      <el-card class="box-card">-->
-<!--        <div class="text item">-->
-<!--          -->
-<!--        </div>-->
-<!--      </el-card>-->
-<!--      <br>-->
-
-<!--      <el-card class="box-card">-->
-<!--        <div class="text item">-->
-<!--          <el-form-item label="教室容量">-->
-<!--            <el-slider-->
-<!--              width="50%"-->
-<!--              v-model="pojo.capacity"-->
-<!--              show-stops-->
-<!--              :step="50"-->
-<!--              :max="250"-->
-<!--              :marks="marks"-->
-<!--              disabled>-->
-<!--            </el-slider>-->
-<!--          </el-form-item>-->
-<!--        </div>-->
-<!--      </el-card>-->
-<!--      <br>-->
-
       <el-card class="box-card">
         <div slot="header" class="clearfix">
           <span>选择时间段</span>
@@ -62,8 +38,6 @@
         </div>
       </el-card>
     </el-form>
-
-<!--    <el-button type="primary" @click="handleReserveTest">测试</el-button>-->
   </div>
 </template>
 
@@ -142,7 +116,7 @@ export default {
 
     handleReserveTest() {
       // 表单验证，要选择至少一个时间段
-      if (!this.pojo.course1 && !this.pojo.course3 && !this.pojo.course4 && !this.pojo.course4) {
+      if (!this.pojo.course1 && !this.pojo.course2 && !this.pojo.course3 && !this.pojo.course4) {
         this.$message({
           message: '请至少选择一个时间段！',
           type: 'warning'
